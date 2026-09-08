@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/dist-electron/
+*.tsbuildinfo
+.vite/
+npm-debug.log*
+
+# Rust
+target/
+
+# Runtime data / secrets / local state
+.env
+*.db
+*.sqlite
+*.sqlite3
+config.json
+
+# Logs & temp
+*.log
+/tmp/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

@@ -1,0 +1,44 @@
+name: Feature request
+description: Propose something new — or a scope decision worth discussing
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        OpenTerm stays local-first and single-user. Features that need
+        accounts, servers, telemetry or real-money guarantees are out of
+        scope by design.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem this solves
+      placeholder: What can't you do today, and why does it matter?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Rough shape is fine; UI sketch or API sketch even better.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      multiple: true
+      options:
+        - backend/api
+        - providers (data feeds)
+        - paper broker / trading
+        - alerts
+        - websocket protocol
+        - frontend UI
+        - scripts console
+        - bots / rust runtime
+        - tooling / CI
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: Workarounds you tried, adjacent features rejected...

@@ -1,0 +1,19 @@
+# Normalize line endings: text files are stored LF in the repo,
+# checked out as LF (this project is developed and run on Linux/macOS).
+* text=auto eol=lf
+
+# Binary artifacts — never attempt line-ending conversion or diffs
+*.png binary
+*.jpg binary
+*.ico binary
+*.pdf binary
+*.db binary
+*.wasm binary
+
+# Generated / vendored files — hide from diff noise on GitHub
+frontend/package-lock.json linguist-generated=true
+bot-runtime/Cargo.lock linguist-generated=true
+
+# Shell and Makefiles need LF to stay executable
+Makefile text eol=lf
+*.sh text eol=lf

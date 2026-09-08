@@ -1,0 +1,17 @@
+[package]
+name = "openterm-bot-protocol"
+version = "0.1.0"
+edition = "2021"
+description = "OpenTerm bot wire-protocol types (EXPERIMENTAL — see bot-runtime/README.md)"
+license = "Apache-2.0"
+publish = false
+
+[workspace]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# fast-rng removed: this is a server-side protocol crate; the CSPRNG default
+# for v4 is exactly what we want and fast-rng only invites misuse in wasm.
+uuid = { version = "1", features = ["serde", "v4"] }
+chrono = { version = "0.4", features = ["serde"] }

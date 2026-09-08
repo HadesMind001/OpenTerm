@@ -1,0 +1,38 @@
+# ── EXPERIMENTAL crate ────────────────────────────────────────────────────
+# Nothing in this workspace executes a bot end-to-end yet. See README.md.
+[package]
+name = "openterm-bot-runtime"
+version = "0.1.0"
+edition = "2021"
+description = "WASM bot runtime for OpenTerm (EXPERIMENTAL scaffolding — not wired to the app)"
+license = "Apache-2.0"
+# Private crate: never meant for crates.io (path-dep of nothing yet; the app
+# does not link it). publish=false is a seatbelt, not a decoration.
+publish = false
+
+# Explicit standalone workspace: without this, cargo walks UP looking for a
+# workspace root and the day someone adds one at repo root, this crate's
+# lockfile silently becomes shared.
+[workspace]
+
+[dependencies]
+openterm-bot-protocol = { path = "../bot-protocol" }
+# Core wasm modules only: component-model was never used (grep it) and every
+# extra feature is another 20 seconds of compile time in CI.
+wasmtime = { version = "25", features = ["parallel-compilation"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "net", "io-util", "time"] }
+sqlx = { version = "0.8", features = ["sqlite", "runtime-tokio-rustls", "chrono"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+async-trait = "0.1"
+clap = { version = "4", features = ["derive", "env"] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["serde", "v4"] }
+dirs = "5"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+thiserror = "1"
+parking_lot = "0.12"
+
+[dev-dependencies]
+tempfile = "3"

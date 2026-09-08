@@ -1,0 +1,60 @@
+name: Bug report
+description: Something demonstrably does not do what it claims
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Local-first, single-user app — "no auth" and "paper money is floats"
+        are documented design choices, not bugs. Read README.md "Known
+        limitations" and SECURITY.md first.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      placeholder: Actual behavior, and the exact expected behavior instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      placeholder: |
+        1. make dev ...
+        2. Ctrl+K, type ...
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - backend/api
+        - providers (data feeds)
+        - paper broker / trading
+        - alerts
+        - websocket / live updates
+        - frontend UI
+        - scripts console
+        - bots / rust runtime (experimental)
+        - build/install
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS + version, `python --version`, `node --version`, commit/tag if not main.
+      placeholder: Fedora 42 / Python 3.13 / Node 22 / main@abc1234
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: >
+        Backend log (make dev writes /tmp/openterm-dev/backend.log) and browser
+        console. REDACT any API keys — provider URLs can contain them.
+      render: shell

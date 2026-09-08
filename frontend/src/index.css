@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0c10;
+  --panel: #10141b;
+  --panel2: #171d27;
+  --border: #232a36;
+  --amber: #ffb000;
+  --up: #34d399;
+  --down: #f87171;
+  --text: #d7dde8;
+  --dim: #8a94a6;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+}
+
+@keyframes flashUp {
+  0% { background-color: rgba(52, 211, 153, 0.28); }
+  100% { background-color: transparent; }
+}
+@keyframes flashDown {
+  0% { background-color: rgba(248, 113, 113, 0.28); }
+  100% { background-color: transparent; }
+}
+.flash-up { animation: flashUp 0.55s ease-out; }
+.flash-down { animation: flashDown 0.55s ease-out; }
+
+@keyframes flashRectUp {
+  0% { stroke: #34d399; stroke-width: 3; }
+  100% { stroke: var(--bg); stroke-width: 1; }
+}
+@keyframes flashRectDown {
+  0% { stroke: #f87171; stroke-width: 3; }
+  100% { stroke: var(--bg); stroke-width: 1; }
+}
+.flash-rect-up { animation: flashRectUp 0.55s ease-out; }
+.flash-rect-down { animation: flashRectDown 0.55s ease-out; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #2a3340; border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
