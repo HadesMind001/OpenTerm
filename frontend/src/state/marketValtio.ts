@@ -205,11 +205,26 @@ export function applyFrame(frame: any) {
   // FRAME_COMPRESSED_EVENT and the WS layer (lib/ws.ts) decompresses before
   // calling us — depth frames are always above that threshold, which is why
   // the L2 book historically looked "empty" while a bug sat in the transport.
+  // Providers serialize levels as {price,size} objects (pydantic DepthLevel);
+  // the store contract is [price,size] tuples, so normalize here — accepting
+  // both shapes keeps tuple-destructuring consumers (DepthPanel) from
+  // crashing with "object is not iterable" on the real payload.
   if (topic.startsWith('depth:')) {
     const key = topic.slice(6)
-    const bids = (data.bids ?? []) as Array<[number, number]>
-    const asks = (data.asks ?? []) as Array<[number, number]>
-    marketState.depth[key] = { bids, asks }
+    const toLevels = (rows: unknown): Array<[number, number]> =>
+      Array.isArray(rows)
+        ? rows
+            .map((r): [number, number] | null => {
+              if (Array.isArray(r)) return [Number(r[0]), Number(r[1])]
+              if (r && typeof r === 'object') {
+                const o = r as { price?: unknown; size?: unknown }
+                return [Number(o.price), Number(o.size)]
+              }
+              return null
+            })
+            .filter((l): l is [number, number] => !!l && Number.isFinite(l[0]) && Number.isFinite(l[1]))
+        : []
+    marketState.depth[key] = { bids: toLevels(data.bids), asks: toLevels(data.asks) }
     return
   }
 

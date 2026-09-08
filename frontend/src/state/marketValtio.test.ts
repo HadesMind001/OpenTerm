@@ -80,6 +80,16 @@ describe('applyFrame', () => {
       data: { bids: [[1, 2]], asks: [[3, 4]] },
     })
     expect(marketState.depth['CRYPTO:BTCUSDT']?.asks).toEqual([[3, 4]])
+    // real provider payloads are {price,size} objects (pydantic DepthLevel)
+    applyFrame({
+      t: 'e',
+      topic: 'depth:CRYPTO:BTCUSDT',
+      data: {
+        bids: [{ price: 1, size: 2 }],
+        asks: [{ price: 3, size: 4 }],
+      },
+    })
+    expect(marketState.depth['CRYPTO:BTCUSDT']?.bids).toEqual([[1, 2]])
     applyFrame({ t: 'e', topic: 'status:yahoo', data: { connected: false } })
     expect(marketState.statuses.yahoo).toBe(false)
   })

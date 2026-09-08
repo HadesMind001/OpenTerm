@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc --noEmit -p tsconfig.json && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "dist": "vite build && electron-builder"
   },
   "dependencies": {
     "@msgpack/msgpack": "^3.1.3",
@@ -26,10 +27,29 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.1.0",
     "electron": "^44.1.1",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2",
     "tailwindcss": "^4.3.3",
     "typescript": "5.8",
     "vite": "^8.2.2",
     "vite-plugin-electron": "^1.1.2",
     "vitest": "^3.2.7"
+  },
+  "build": {
+    "appId": "com.openterm.app",
+    "productName": "OpenTerm",
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "directories": {
+      "app": "dist"
+    },
+    "win": {
+      "target": "exe"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }

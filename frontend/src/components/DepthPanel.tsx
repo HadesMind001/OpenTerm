@@ -12,7 +12,7 @@ export function DepthPanel() {
   const depth = useDepth(key ?? '')
 
   const { bidRows, askRows, imbalance, spread } = useMemo(() => {
-    if (!depth) {
+    if (!depth || !Array.isArray(depth.bids) || !Array.isArray(depth.asks)) {
       // 0.5 imbalance / null spread = the NEUTRAL placeholder, not a
       // measurement. Do not read a flat 50/50 bar as "balanced book" — it
       // means "no book yet".
@@ -43,7 +43,7 @@ export function DepthPanel() {
     // asks cumulate best→worst but must RENDER worst-on-top (ladder toward
     // the spread divider), hence the reverse after the numbers are built —
     // flip it and the cumulative bars measure away from the spread.
-    return { bidRows: bids, askRows: asks.reverse(), imbalance: imb, spread: sp }
+    return { bidRows: bids, askRows: asks.slice().reverse(), imbalance: imb, spread: sp }
   }, [depth])
 
   const maxCum = Math.max(
