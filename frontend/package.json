@@ -39,11 +39,11 @@
     "appId": "com.openterm.app",
     "productName": "OpenTerm",
     "files": [
-      "dist/**/*",
+      "dist-electron/**/*",
       "electron/**/*"
     ],
     "directories": {
-      "app": "dist"
+      "app": "dist-electron"
     },
     "win": {
       "target": "exe"
