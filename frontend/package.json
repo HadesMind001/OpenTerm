@@ -27,7 +27,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.1.0",
     "electron": "^44.1.1",
-    "electron-builder": "^24.13.3",
+    "electron-builder": "^26.15.3",
     "electron-packager": "^17.1.2",
     "tailwindcss": "^4.3.3",
     "typescript": "5.8",
